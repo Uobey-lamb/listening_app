@@ -1,0 +1,15 @@
+[project]
+name = "myapp001"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.121.1",
+    "google-api-python-client>=2.187.0",
+    "psycopg2-binary>=2.9.11",
+    "pwdlib[argon2]>=0.3.0",
+    "pyjwt>=2.10.1",
+    "sqlmodel>=0.0.27",
+    "youtube-transcript-api==0.4.4",
+]
