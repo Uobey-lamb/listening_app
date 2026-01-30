@@ -25,14 +25,3 @@ class Problem(SQLModel, table=True):
     answer: list[str] = Field(sa_column=Column(JSONB))
     options: list[dict[str, str]] = Field(sa_column=Column(JSONB))
     created_at: datetime = Field(default_factory=datetime.utcnow)
-
-"""
-class ListeningQuestion(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    video_id: str = Field(foreign_key="video.video_id")
-    question_type: str
-    payload: dict = Field(
-        sa_column=Column(JSONB)
-    )
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-"""
