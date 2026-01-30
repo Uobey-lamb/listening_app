@@ -38,24 +38,7 @@ YOUTUBE_CHANNEL_ID = 'UCsooa4yRKGN_zEE8iknghZA'
 
 youtube = build('youtube', 'v3', developerKey=MY_API_KEY)
 
-# 動画取得
-def get_recent_video_ids(channel_id: str, max_results: int=50) -> list[str]:
-    res = youtube.search().list(
-        part="id",
-        channelId=channel_id,
-        order="date",
-        maxResults=max_results,
-        type="video",
-        publishedBefore=(datetime.utcnow() - timedelta(days=2)).isoformat("T") + "Z"
-    ).execute()
-
-    return [
-        item["id"]["videoId"]
-        for item in res.get("items", [])
-        if "videoId" in item["id"]
-    ]
-
-# 新設分の動画取得関数
+# 動画取得関数
 def fetch_and_store_videos(channel_id: str, max_results: int = 50):
     res = youtube.search().list(
         part="id",
@@ -174,9 +157,6 @@ def store_problem() -> bool:
             select(Video.video_id)
         ).all()
         video_ids = [vid for vid in video_ids if vid not in failed_ids]
-        
-        #video_ids = get_recent_video_ids(YOUTUBE_CHANNEL_ID, max_results=30)
-        #video_ids = [vid for vid in video_ids if vid not in failed_ids]
 
         random.shuffle(video_ids)
 
